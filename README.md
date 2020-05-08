@@ -3,7 +3,8 @@ extract audio from browsers yt with AHK
 
 requires youtube-dl https://github.com/ytdl-org/youtube-dl
 Requires FFMPEG
-Included 7zip archive with both yt-dl and FFMPEG
+Included 7zip archive with both yt-dl and FFMPEG (dont overwrite the youtube-dl.exe with the onefrom the 7zip)
+
 
 optional config for specifying output folder:
   run _ config move.bat
