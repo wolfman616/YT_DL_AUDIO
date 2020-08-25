@@ -11,7 +11,9 @@ optional config for specifying output folder:
   if not the output will be with the AHK
 
 YT_DL_AUDIO.ahk:
-  CTRL + WIN + X
+  CTRL + WIN + X to extract audio of current 
+i have managed to get it working in the background now.
+ctrl shift + right arrow to skip to next video and Left arrow to previous
 
 Bugs:
-  Doesnt currently work with Chrome 
+only works on the first tab on each chrome or firefox tab.
