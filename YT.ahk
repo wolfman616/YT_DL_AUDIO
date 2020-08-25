@@ -11,18 +11,21 @@ ModernBrowsers := "ApplicationFrameWindow,Chrome_WidgetWin_0,Chrome_WidgetWin_1,
 LegacyBrowsers := "IEFrame,OperaWindowClass"
 
 
-
 ^+Left::
 if Winexist(" - YouTube")	 
 	controlsendraw,, +p
 Return
 	
 ^+Right::
-
 if Winexist(" - YouTube") 
 	controlsend,, +N
 return
-	
+
+^+Space::
+if Winexist(" - YouTube") 
+	controlsend,, K
+return	
+
 ^#x::
 	YT_hWND:=Winexist(" - YouTube")
 	nTime := A_TickCount
