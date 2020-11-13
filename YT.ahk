@@ -40,27 +40,59 @@ If (sURL != "")
 		{
 		YT_iD := RegExreplace(Reg_3,"(v=)|(&)","")
 	;	YT_iD := RegExreplace(YT_iD,"&","")
-		RunWait, %comspec% /c "youtube-dl.exe %YT_iD% -x --extract-audio" 
-		Title:=RegeXReplace(title, "i)( - Mozilla Firefox)|( - YouTube)", "")
-		DARRENAIDS1:="S:\IN\_ youtube\"
-		DARRENAIDS2=%DARRENAIDS1%%Title%
-		DARRENAIDS3="%DarrenAIDS2%.opus"
-		if InvokeVerb(DARRENAIDS3, "Cut")
-			tooltip Darren has opus aids 
-		Else 
-			DARRENAIDS3="%DarrenAIDS2%.m4a"
-		If fileExist DarrenAIDS3
-			{
-			;clipboard:=DARRENAIDS
-			TrayTip, YouTube, Ausdio Extracted to Clipboard,
-			InvokeVerb(DARRENAIDS3, "Cut")	
-			}	
-		}	}
+		RunWait, %comspec% /c "youtube-dl.exe %YT_iD%" > c:\out\myoutput.txt,, Hide ;
+		FileRead, logss, "c:\out\myoutput.txt"
+		runwait c:\out\myoutput.txt
+		sleep 500
+		filedelete, c:\out\myoutput.txt
+		TrayTip, YouTube, Video Extracted
+		collection := [ " has ", MozillaDropShadowWindowClass ]
+		while FoundPos := InStr(logss, "[download] ", CaseSensitive := false, StartingPos := 1, Occurrence := 1)
+			cacaca:=
+		}
+	}	
 	Else If sClass In % ModernBrowsers "," LegacyBrowsers
 		MsgBox, % "The URL couldn't be determined (" sClass ")"
 	Else
 		MsgBox, % "Not a browser or browser not supported (" sClass ")"
 	Return
+
+^#v::
+FileMove, C:\Users\ninj\AppData\Roaming\youtube-dl\config.txt, C:\Users\ninj\AppData\Roaming\youtube-dl\config2.txt
+if fileExist ("C:\Users\ninj\AppData\Roaming\youtube-dl\config2.txt")
+	{
+	FileCopy, "C:\Users\ninj\AppData\Roaming\youtube-dl\configvid.txt", "C:\Users\ninj\AppData\Roaming\youtube-dl\config.txt" , Overwrite
+	YT_hWND:=Winexist(" - YouTube")
+	nTime := A_TickCount
+	WinGetClass, sClass, ahk_id %YT_hWND%
+	WinGetTitle Title, ahk_id %YT_hWND%
+	sURL := GetBrowserURL_ACC(sClass)
+	If (sURL != "")
+		{
+		Reg_1:=Format(sURL)
+		RegExMatch(Reg_1, "(?:v)=(.*?)(?:&|$)" , Reg_3)
+			If (Reg_3 != "")
+			{
+			YT_iD := RegExreplace(Reg_3,"(v=)|(&)","")
+		;	YT_iD := RegExreplace(YT_iD,"&","")
+			RunWait, %comspec% /c "youtube-dl.exe %YT_iD%"> c:\out\myoutput.txt,, Hide
+			FileRead, logss, "c:\out\myoutput.txt"
+			runwait c:\out\myoutput.txt
+			sleep 500
+			filedelete, c:\out\myoutput.txt
+			TrayTip, YouTube, Video Extracted
+			collection := [ " has ", MozillaDropShadowWindowClass ]
+			while FoundPos := InStr(logss, "[download] ", CaseSensitive := false, StartingPos := 1, Occurrence := 1)
+				cacaca:=
+			FileMove, C:\Users\ninj\AppData\Roaming\youtube-dl\config2.txt, C:\Users\ninj\AppData\Roaming\youtube-dl\config.txt, Overwrite
+			}	
+		}
+	Else If sClass In % ModernBrowsers "," LegacyBrowsers
+		MsgBox, % "The URL couldn't be determined (" sClass ")"
+	Else	MsgBox, % "Not a browser or browser not supported (" sClass ")"
+	Return
+	}
+
 InvokeVerb(path, menu) {
 bjShell := ComObjCreate("Shell.Application")
 if InStr(FileExist(path), "D") || InStr(path, "::{") {
